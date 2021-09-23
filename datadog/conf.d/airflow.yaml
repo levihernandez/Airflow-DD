@@ -1,0 +1,32 @@
+logs:
+  - type: file
+    path: /opt/airflow/logs/postgres/audit_admin.log
+    source: postgresql
+    service: airflow-dag-audit
+    
+  - type: file
+    path: /opt/airflow/logs/dag_processor_manager/dag_processor_manager.log
+    source: airflow
+    service: airflow-manager
+    log_processing_rules:
+      - type: multi_line
+        name: new_log_start_with_date
+        pattern: \[\d{4}\-\d{2}\-\d{2}
+
+  #- type: file
+  #  path: /opt/airflow/logs/scheduler/*/*/*/*.log
+  #  source: airflow
+  #  service: airflow-scheduler
+  #  log_processing_rules:
+  #    - type: multi_line
+  #      name: new_log_start_with_date
+  #      pattern: \[\d{4}\-\d{2}\-\d{2}
+  #
+  #- type: file
+  #  path: /opt/airflow/logs/dag-tasks/*/*/*/*.log
+  #  source: airflow
+  #  service: airflow-tasks
+  #  log_processing_rules:
+  #    - type: multi_line
+  #      name: new_log_start_with_date
+  #      pattern: \[\d{4}\-\d{2}\-\d{2}
